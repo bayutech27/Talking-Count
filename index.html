@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Talking Counter</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: #f3f4f6;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .counter {
+      font-size: 4rem;
+      margin: 20px 0;
+    }
+
+    .buttons button {
+      font-size: 1.5rem;
+      margin: 10px;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 10px;
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .buttons button:hover {
+      background: #1d4ed8;
+    }
+  </style>
+</head>
+<body>
+  <h1>Talking Counter 🔊</h1>
+  <div class="counter" id="count">0</div>
+  <div class="buttons">
+    <button onclick="changeCount(-1)">−</button>
+    <button onclick="changeCount(1)">+</button>
+  </div>
+
+  <script>
+    let count = 0;
+    const countDisplay = document.getElementById("count");
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 0.9; // speed (0.1–10)
+      utterance.pitch = 1;  // normal tone
+      speechSynthesis.speak(utterance);
+    } 
+
+    function changeCount(value) {
+      count += value;
+      countDisplay.textContent = count;
+      speak(count);
+    }
+  </script>
+</body>
+</html>
